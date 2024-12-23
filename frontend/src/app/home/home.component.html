@@ -1,0 +1,18 @@
+<div
+  class="bg-gradient-to-tr from-white via-[#00bfd8] to-[#0083f5] w-screen h-screen flex flex-col justify-center items-center space-y-6"
+>
+  <app-info-toast [show_success]="showSuccess()" [show_error]="showError()" [file_name]="notification_file_name()" (close_success)="close_success()" (close_error)="close_error()"/>
+  <app-token-input (token)="updateToken($event)" />
+  <app-dropzone (filesChange)="updateFiles($event)" />
+  <app-send-button
+    [buttonState]="files().length == 0"
+    (sendToBackend)="sendToBackend()"
+  />
+  <app-attached-files [files]="files()" (removeFile)="removeFile($event)" />
+  <app-confirm-popup
+    [showDialogue]="dialogueState()"
+    [fileCount]="files().length"
+    (dialogueState)="updateDialogueState($event)"
+    (uploadFiles)="uploadFiles()"
+  />
+</div>

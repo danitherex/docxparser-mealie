@@ -1,0 +1,1 @@
+export type ExtendedFile = File & { id: string };
