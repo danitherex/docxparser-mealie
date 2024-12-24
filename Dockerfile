@@ -19,5 +19,6 @@ COPY ./backend/app /code/app
 
 COPY --from=frontend /usr/src/app/dist/frontend /code/app/frontend
 
+ENV STAGE=prod
 
 CMD ["fastapi", "run", "app/main.py", "--port", "99"]

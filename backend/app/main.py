@@ -14,30 +14,35 @@ import os
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+STAGE = os.getenv("STAGE", "dev")
 
-origins = [
-    "http://localhost",
-    "http://localhost:4200",
-]
+
 
 
 dotenv.load_dotenv()
 
 app = FastAPI()
+if STAGE == "dev":
+    logger.info("Running in dev mode")
+    origins = [
+        "http://localhost",
+        "http://localhost:4200",
+    ]
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=origins,
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
+    app.add_middleware(
+        CORSMiddleware,
+        allow_origins=origins,
+        allow_credentials=True,
+        allow_methods=["*"],
+        allow_headers=["*"],
+    )
+else:
+    logger.info("Running in prod mode")
+    # Serve static files for assets
+    app.mount('/frontend/', StaticFiles(directory='/code/app/frontend/browser', html=True), name='static')
 
 app.include_router(upload.router)
 
-# Serve static files for assets
-app.mount('/frontend/', StaticFiles(directory='/code/app/frontend/browser', html=True), name='static')
 
 # WebSocket endpoint
 @app.websocket("/ws/{token}",)

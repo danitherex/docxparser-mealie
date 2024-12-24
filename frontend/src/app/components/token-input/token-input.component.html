@@ -1,31 +1,33 @@
 <div class="w-screen flex flex-col items-center justify-center relative">
   @if (showInput()) {
-  <div class="relative w-full justify-center items-center flex flex-row">
-    <input
-      type="text"
-      class="w-1/2 p-2 border-2 border-gray-300 rounded-3xl focus:outline-none focus:border-gray-400"
-      placeholder="Enter Mealie API Token"
-      [(ngModel)]="tokenValue"
-      (keypress)="onEnter($event)"
-    />
-    <button
-      type="submit"
-      class="relative right-11 p-2.5 h-full text-sm font-medium text-white bg-[#0083f5] rounded-3xl hover:bg-blue-800 focus:outline-none dark:bg-[#0083f5] dark:hover:bg-blue-700"
-      (click)="updateToken()"
-    >
-      <svg
-        class="h-5 w-5 text-white"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+  <div class="relative flex justify-center items-center w-full">
+    <div class="relative w-1/2">
+      <input
+        type="text"
+        class="w-full p-2 pr-12 border-2 border-gray-300 rounded-3xl focus:outline-none focus:border-gray-400"
+        placeholder="Enter Mealie API Token"
+        [(ngModel)]="tokenValue"
+        (keypress)="onEnter($event)"
+      />
+      <button
+        type="submit"
+        class="absolute top-1/2 right-2 transform -translate-y-1/2 p-2 text-sm font-medium text-white bg-[#0083f5] rounded-full hover:bg-blue-800 focus:outline-none dark:bg-[#0083f5] dark:hover:bg-blue-700"
+        (click)="updateToken()"
       >
-        <path stroke="none" d="M0 0h24v24H0z" />
-        <path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" />
-      </svg>
-    </button>
+        <svg
+          class="h-5 w-5 text-white"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <path d="M9 11l-4 4l4 4m-4 -4h11a4 4 0 0 0 0 -8h-1" />
+        </svg>
+      </button>
+    </div>
   </div>
 
   }@else{

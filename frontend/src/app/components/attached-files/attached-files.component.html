@@ -1,34 +1,44 @@
 <div class="w-full">
   @if(files().length==0){
   <div>No file attached yet.</div>
-  } @else { @for (file of files(); track $index) {
-  <div>
-    <div class="flex flex-row w-full">
-      <img [src]="isFileDocx(file.name)?'docx_icon.png':'invalid_icon.png'" alt="file" class="w-14 h-14" />
-      <button
-        type="button"
-        class="ml-auto rounded-md p-2 inline-flex items-center justify-center text-red-600 hover:text-red-500 focus:outline-none"
-        (click)="onRemoveFile(file.id)"
-      >
-        <svg
-          class="h-6 w-6"
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
+  } @else {
+  <div class="flex flex-col shadow-2xl h-64 overflow-y-auto w-full">
+    @for (file of files(); track $index) {
+    <div>
+      <div class="flex flex-row w-full">
+        <img
+          [src]="isFileDocx(file.name) ? 'docx_icon.png' : 'invalid_icon.png'"
+          alt="file"
+          class="w-14 h-14"
+        />
+        <span class="w-96">{{ file.name }}</span>
+        <button
+          type="button"
+          class="ml-auto rounded-md p-4 inline-flex items-center justify-center text-red-600 hover:text-red-500 focus:outline-none"
+          (click)="onRemoveFile(file.id)"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-      </button>
-      
+          <svg
+            class="h-6 w-6"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+      @if($index < files().length - 1){
+        <hr class="my-2 border-blue-400" />
+      }
     </div>
-    <span>{{ file.name }}</span>
+    }
   </div>
-  } }
+  }
 </div>
